@@ -53,6 +53,12 @@ export const IAuthContextAction = {
     payload: {...IAuthUser}
 }
 
+
+
+const login = (userName,password) => {};
+const register = (firstName,lastName,userName,email,password,address) => {};
+const logout = () => {};
+
 export const IAuthContext = {
     isAuthenticated: false,
     isAuthLoading: false,
@@ -61,7 +67,3 @@ export const IAuthContext = {
     register,
     logout
 }
-
-const login = () => {};
-const register = () => {};
-const logout = () => {};
