@@ -16,5 +16,5 @@ export const getSession = () => {
     return localStorage.getSession('accessToken');
 };
 
-export const allAccessRoles = [Roles.ADMIN,Roles.USER];
-export const adminAccessRoles = [Roles.ADMIN];
+export const allAccessRoles = ['ADMIN','USER'];
+export const adminAccessRoles = ['ADMIN'];
