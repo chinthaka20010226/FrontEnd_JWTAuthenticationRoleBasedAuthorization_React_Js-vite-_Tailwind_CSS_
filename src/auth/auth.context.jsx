@@ -1,18 +1,9 @@
 import {
-    ReactNoode,
     createContext,
     useReducer,
     useCallback,
     useEffect
 } from 'react';
-
-import {
-    IAuthContext,
-    IAuthContextAction,
-    IAuthContextActionTypes,
-    IAuthContextState,
-    ILoginResponseDto
-} from '../types/auth';
 
 import { getSession, setSession } from './auth.utils';
 
@@ -34,7 +25,7 @@ import {
 
 // We need a reducer function for useReducer hook
 const authReducer = (state,action) => {
-    if(action.type === IAuthContextActionTypes.LOGIN){
+    if(action.type === 'LOGIN'){
         return {
             ...state,
             isAuthenticated: true,
@@ -42,7 +33,7 @@ const authReducer = (state,action) => {
             user: action.payload,
         }
     }
-    if(action.type === IAuthContextActionTypes.LOGOUT){
+    if(action.type === 'LOGOUT'){
         return {
             ...state,
             isAuthenticated: false,
@@ -81,19 +72,19 @@ const AuthContextProvider = ({ children }) => {
                 const { newToken, userInfo } = response.data;
                 setSession(newToken);
                 dispatch({
-                    type: IAuthContextActionTypes.LOGIN,
+                    type: 'LOGIN',
                     payload: userInfo,
                 })
             } else {
                 setSession(null);
                 dispatch({
-                    type: IAuthContextActionTypes.LOGOUT,
+                    type: 'LOGOUT',
                 });
             }
         } catch (error) {
             setSession(null);
             dispatch({
-                type: IAuthContextActionTypes.LOGOUT,
+                type: 'LOGOUT',
             });
         }
     },[]);
@@ -133,7 +124,7 @@ const AuthContextProvider = ({ children }) => {
         const { newToken, userInfo } = response.data;
         setSession(newToken);
         dispatch({
-            type: IAuthContextActionTypes.LOGIN,
+            type: 'LOGIN',
             payload: userInfo,
         });
         navigate(PATH_AFTER_LOGIN);
@@ -143,7 +134,7 @@ const AuthContextProvider = ({ children }) => {
     const logout = useCallback(() => {
         setSession(null);
         dispatch({
-            type: IAuthContextActionTypes.LOGOUT,
+            type: 'LOGOUT',
         });
         navigate(PATH_AFTER_LOGOUT);
     },[]);

@@ -1,4 +1,3 @@
-import { Roles } from '../types/auth';
 import axiosInstance from '../utils/axiosInstance';
 
 export const setSession = (accessToken) => {
