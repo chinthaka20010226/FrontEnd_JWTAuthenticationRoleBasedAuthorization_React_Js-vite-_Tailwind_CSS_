@@ -110,7 +110,7 @@ const AuthContextProvider = ({ children }) => {
         console.log('Register Result:', response);
         toast.success('Register Was Successfull. Please Login.');
         navigate(PATH_AFTER_REGISTER);
-    });
+    },[]);
 
     //Login Method
     const login = useCallback(async (userName,password) => {
