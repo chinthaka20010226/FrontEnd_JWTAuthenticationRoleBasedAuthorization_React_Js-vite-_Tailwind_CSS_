@@ -12,14 +12,14 @@ const Header = () => {
 
     const userRolesLabelCreator = () => {
         if (user) {
-            let result = '';
-            user.roles.forEach((role, index) => {
-                result += role;
-                if (index < user.roles.length - 1) {
-                    result += ', ';
-                }
-            });
-            return result;
+            // let result = '';
+            // user.roles.forEach((role, index) => {
+            //     result += role;
+            //     if (index < user.roles.length - 1) {
+            //         result += ', ';
+            //     }
+            // });
+            return "User";
         }
         return '--';
     };
