@@ -33,7 +33,7 @@ const GlobalRouter = () => {
                 <Route path={PATH_PUBLIC.unauthorized} element={<UnauthorizedPage />} />
 
                 {/* Protected routes */}
-                <Route element={<AuthGuard roles={allAccessRoles} />}>
+                <Route element={<AuthGuard />}>
                     <Route path={PATH_DASHBOARD.dashboard} element={<DashboardPage />} />
                     <Route path={PATH_DASHBOARD.sendMessage} element={<SendMessagePage />} />
                     <Route path={PATH_DASHBOARD.inbox} element={<InboxPage />} />
@@ -41,7 +41,7 @@ const GlobalRouter = () => {
                     <Route path={PATH_DASHBOARD.user} element={<UserPage />} />
                 </Route>
 
-                <Route element={<AuthGuard roles={adminAccessRoles} />}>
+                <Route element={<AuthGuard />}>
                     <Route path={PATH_DASHBOARD.admin} element={<AdminPage />} />
                     <Route path={PATH_DASHBOARD.usersManagement} element={<UsersManagementPage />} />
                     <Route path={PATH_DASHBOARD.allMessages} element={<AllMessagesPage />} />

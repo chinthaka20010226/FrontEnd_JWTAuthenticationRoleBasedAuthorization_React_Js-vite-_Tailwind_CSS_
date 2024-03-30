@@ -47,6 +47,7 @@ const RegisterPage = () => {
     // with backend
     const onSubmitRegisterForm = async (data) => {
         try {
+            // let userRole = 'USER';
             setLoading(true);
             await register(data.firstName,data.lastName,data.userName,data.email,data.password,data.address);                                                    
             setLoading(false);

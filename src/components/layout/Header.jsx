@@ -11,15 +11,8 @@ const Header = () => {
     const navigate = useNavigate();
 
     const userRolesLabelCreator = () => {
-        if (user) {
-            // let result = '';
-            // user.roles.forEach((role, index) => {
-            //     result += role;
-            //     if (index < user.roles.length - 1) {
-            //         result += ', ';
-            //     }
-            // });
-            return "User";
+        if (user && user.roles) {
+            return user.roles;
         }
         return '--';
     };
