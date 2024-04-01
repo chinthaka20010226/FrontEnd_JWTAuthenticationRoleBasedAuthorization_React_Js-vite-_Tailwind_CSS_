@@ -6,4 +6,4 @@ const AllMessagesPage = () => {
     )
 }
 
-export default AllMessagesPage
+export default AllMessagesPage;

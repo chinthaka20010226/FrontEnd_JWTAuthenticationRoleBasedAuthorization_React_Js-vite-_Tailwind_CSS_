@@ -6,4 +6,4 @@ const SystemLogsPage = () => {
     )
 }
 
-export default SystemLogsPage
+export default SystemLogsPage;

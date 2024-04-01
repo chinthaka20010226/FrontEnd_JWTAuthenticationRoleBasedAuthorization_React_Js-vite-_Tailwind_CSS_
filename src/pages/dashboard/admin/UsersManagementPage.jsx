@@ -6,4 +6,4 @@ const UsersManagementPage = () => {
     )
 }
 
-export default UsersManagementPage
+export default UsersManagementPage;

@@ -2,7 +2,7 @@ import { CiUser } from 'react-icons/ci';
 import useAuth from '../../hooks/useAuth.hook';
 import Button from '../general/Button';
 import { useNavigate } from 'react-router-dom';
-import { PATH_DASHBOARD } from '../../routes/paths';
+import { PATH_DASHBOARD_ADMIN, PATH_DASHBOARD_USER } from '../../routes/paths';
 
 
 const Sidebar = () => {
@@ -29,37 +29,37 @@ const Sidebar = () => {
                     <div className='flex flex-col items-stretch gap-8'>
                         <Button
                             label='Users Management'
-                            onClick={() => handelClick(PATH_DASHBOARD.usersManagement)}
+                            onClick={() => handelClick(PATH_DASHBOARD_ADMIN.usersManagement)}
                             type='button'
                             variant='secondary'
                         />
                         <Button
                             label='Send Message'
-                            onClick={() => handelClick(PATH_DASHBOARD.sendMessage)}
+                            onClick={() => handelClick(PATH_DASHBOARD_ADMIN.sendMessage)}
                             type='button'
                             variant='secondary'
                         />
                         <Button
                             label='Inbox'
-                            onClick={() => handelClick(PATH_DASHBOARD.inbox)}
+                            onClick={() => handelClick(PATH_DASHBOARD_ADMIN.inbox)}
                             type='button'
                             variant='secondary'
                         />
                         <Button
                             label='All Messages'
-                            onClick={() => handelClick(PATH_DASHBOARD.allMessages)}
+                            onClick={() => handelClick(PATH_DASHBOARD_ADMIN.allMessages)}
                             type='button'
                             variant='secondary'
                         />
                         <Button
                             label='All Logs'
-                            onClick={() => handelClick(PATH_DASHBOARD.systemLogs)}
+                            onClick={() => handelClick(PATH_DASHBOARD_ADMIN.systemLogs)}
                             type='button'
                             variant='secondary'
                         />
                         <Button
                             label='My Logs'
-                            onClick={() => handelClick(PATH_DASHBOARD.myLogs)}
+                            onClick={() => handelClick(PATH_DASHBOARD_ADMIN.myLogs)}
                             type='button'
                             variant='secondary'
                         />
@@ -68,19 +68,19 @@ const Sidebar = () => {
                     <div className='flex flex-col items-stretch gap-8'>
                         <Button
                             label='Send Message'
-                            onClick={() => handelClick(PATH_DASHBOARD.sendMessage)}
+                            onClick={() => handelClick(PATH_DASHBOARD_USER.sendMessage)}
                             type='button'
                             variant='secondary'
                         />
                         <Button
                             label='Inbox'
-                            onClick={() => handelClick(PATH_DASHBOARD.inbox)}
+                            onClick={() => handelClick(PATH_DASHBOARD_USER.inbox)}
                             type='button'
                             variant='secondary'
                         />
                         <Button
                             label='My Logs'
-                            onClick={() => handelClick(PATH_DASHBOARD.myLogs)}
+                            onClick={() => handelClick(PATH_DASHBOARD_USER.myLogs)}
                             type='button'
                             variant='secondary'
                         />

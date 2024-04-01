@@ -1,18 +1,17 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { PATH_DASHBOARD, PATH_PUBLIC } from './paths';
+import { PATH_DASHBOARD_ADMIN, PATH_DASHBOARD_USER, PATH_DASHBOARD, PATH_PUBLIC } from './paths';
 import AuthGuardForAdminUser from '../auth/AuthGuardForAdminUser';
 import AuthGuardForAdmin from '../auth/AuthGuardForAdmin';
 import Layout from '../components/layout';
 
-import AdminPage from '../pages/dashboard/AdminPage';
-import AllMessagesPage from '../pages/dashboard/AllMessagesPage';
-import DashboardPage from '../pages/dashboard/DashboardPage';
+import AdminDashboard from '../pages/dashboard/admin/AdminDashboard';
+import AllMessagesPage from '../pages/dashboard/admin/AllMessagesPage';
 import InboxPage from '../pages/dashboard/InboxPage';
 import MyLogsPage from '../pages/dashboard/MyLogsPage';
 import SendMessagePage from '../pages/dashboard/SendMessagePage';
-import SystemLogsPage from '../pages/dashboard/SystemLogsPage';
-import UserPage from '../pages/dashboard/UserPage';
-import UsersManagementPage from '../pages/dashboard/UsersManagementPage';
+import SystemLogsPage from '../pages/dashboard/admin/SystemLogsPage';
+import UserDashboard from '../pages/dashboard/user/UserDashboard';
+import UsersManagementPage from '../pages/dashboard/admin/UsersManagementPage';
 import HomePage from '../pages/public/HomePage';
 import LoginPage from '../pages/public/LoginPage';
 import NotFoundPage from '../pages/public/NotFoundPage';
@@ -24,34 +23,38 @@ import UnauthorizedPage from '../pages/public/UnauthorizedPage';
 const GlobalRouter = () => {
     return (
         <Routes>
+            <Route path={PATH_PUBLIC.register} element={<RegisterPage />} />
+            <Route path={PATH_PUBLIC.login} element={<LoginPage />} />
+            <Route path={PATH_PUBLIC.unauthorized} element={<UnauthorizedPage />} />
+
             {/* <Route path='' element /> */}
             <Route element={<Layout />}>
                 {/* Public routes */}
                 <Route index element={<HomePage />} />
-                <Route path={PATH_PUBLIC.register} element={<RegisterPage />} />
-                <Route path={PATH_PUBLIC.login} element={<LoginPage />} />
-                <Route path={PATH_PUBLIC.unauthorized} element={<UnauthorizedPage />} />
 
                 {/* Protected routes */}
                 <Route element={<AuthGuardForAdminUser />}>
-                    <Route path={PATH_DASHBOARD.dashboard} element={<DashboardPage />} />
-                    <Route path={PATH_DASHBOARD.sendMessage} element={<SendMessagePage />} />
-                    <Route path={PATH_DASHBOARD.inbox} element={<InboxPage />} />
-                    <Route path={PATH_DASHBOARD.myLogs} element={<MyLogsPage />} />
-                    <Route path={PATH_DASHBOARD.user} element={<UserPage />} />
+                    <Route path={PATH_DASHBOARD_USER.dashboard} element={<UserDashboard />} />
+                    <Route path={PATH_DASHBOARD_USER.sendMessage} element={<SendMessagePage />} />
+                    <Route path={PATH_DASHBOARD_USER.inbox} element={<InboxPage />} />
+                    <Route path={PATH_DASHBOARD_USER.myLogs} element={<MyLogsPage />} />
                 </Route>
 
                 <Route element={<AuthGuardForAdmin />}>
-                    <Route path={PATH_DASHBOARD.admin} element={<AdminPage />} />
-                    <Route path={PATH_DASHBOARD.usersManagement} element={<UsersManagementPage />} />
-                    <Route path={PATH_DASHBOARD.allMessages} element={<AllMessagesPage />} />
-                    <Route path={PATH_DASHBOARD.systemLogs} element={<SystemLogsPage />} />
+                    <Route path={PATH_DASHBOARD_ADMIN.dashboard} element={<AdminDashboard />} />
+                    <Route path={PATH_DASHBOARD_ADMIN.usersManagement} element={<UsersManagementPage />} />
+                    <Route path={PATH_DASHBOARD_ADMIN.allMessages} element={<AllMessagesPage />} />
+                    <Route path={PATH_DASHBOARD_ADMIN.systemLogs} element={<SystemLogsPage />} />
+                    <Route path={PATH_DASHBOARD_ADMIN.sendMessage} element={<SendMessagePage />} />
+                    <Route path={PATH_DASHBOARD_ADMIN.inbox} element={<InboxPage />} />
+                    <Route path={PATH_DASHBOARD_ADMIN.myLogs} element={<MyLogsPage />} />
                 </Route>
 
-                {/* Catch all 404 */}
-                <Route path={PATH_PUBLIC.notFound} element={<NotFoundPage />} />
-                <Route path='*' element={<Navigate to={PATH_PUBLIC.notFound} replace />}/>
             </Route>
+
+            {/* Catch all 404 */}
+            <Route path={PATH_PUBLIC.notFound} element={<NotFoundPage />} />
+            <Route path='*' element={<Navigate to={PATH_PUBLIC.notFound} replace />} />
         </Routes>
     )
 }

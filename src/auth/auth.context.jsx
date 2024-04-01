@@ -16,11 +16,13 @@ import { useNavigate } from 'react-router-dom';
 import { 
     LOGIN_URL,
     ME_URL,
-    PATH_AFTER_LOGIN,
+    PATH_AFTER_LOGIN_ADMIN,
+    PATH_AFTER_LOGIN_USER,
     PATH_AFTER_REGISTER,
     PATH_AFTER_LOGOUT,
     REGISTER_URL
 } from '../utils/globalConfig';
+import useAuth from '../hooks/useAuth.hook';
 
 
 // We need a reducer function for useReducer hook
@@ -127,7 +129,8 @@ const AuthContextProvider = ({ children }) => {
             type: 'LOGIN',
             payload: userInfo,
         });
-        navigate(PATH_AFTER_LOGIN);
+        // console.log(userInfo.roles);
+        userInfo.roles == "Admin" ? navigate(PATH_AFTER_LOGIN_ADMIN) : navigate(PATH_AFTER_LOGIN_USER);
     },[]);
 
     // Logout Method

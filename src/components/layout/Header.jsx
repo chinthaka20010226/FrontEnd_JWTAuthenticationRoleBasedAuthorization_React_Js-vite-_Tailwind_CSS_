@@ -3,7 +3,8 @@ import Button from '../general/Button';
 import { AiOutlineHome } from 'react-icons/ai';
 import { FiLock, FiUnlock } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
-import { PATH_DASHBOARD, PATH_PUBLIC } from '../../routes/paths';
+import { PATH_DASHBOARD_ADMIN, PATH_PUBLIC } from '../../routes/paths';
+import { PATH_AFTER_LOGIN_USER } from '../../utils/globalConfig';
 
 
 const Header = () => {
@@ -46,7 +47,7 @@ const Header = () => {
                         <div className='flex items-center gap-2'>
                             <Button 
                                 label='Dashboard'
-                                onClick={() => navigate(PATH_DASHBOARD.dashboard)}
+                                onClick={() => user.roles == "Admin" ? navigate(PATH_DASHBOARD_ADMIN.dashboard) : navigate(PATH_AFTER_LOGIN_USER.dashboard)}
                                 type='button'
                                 variant='light'
                             />

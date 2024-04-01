@@ -12,7 +12,7 @@ const Layout = () => {
     console.log(pathname);
 
     const SideBarRenderer = () => {
-        if (isAuthenticated && pathname.toLowerCase().startsWith('/dashboard')){
+        if (isAuthenticated && (pathname.toLowerCase().startsWith('/dashboard') || pathname.toLowerCase().startsWith('/admin') || pathname.toLowerCase().startsWith('/user'))){
             return <Sidebar />
         }
         return null;
