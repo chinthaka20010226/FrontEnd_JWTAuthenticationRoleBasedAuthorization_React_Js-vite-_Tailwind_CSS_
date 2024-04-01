@@ -3,13 +3,36 @@ import Button from '../general/Button';
 import { AiOutlineHome } from 'react-icons/ai';
 import { FiLock, FiUnlock } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
-import { PATH_DASHBOARD_ADMIN, PATH_PUBLIC } from '../../routes/paths';
-import { PATH_AFTER_LOGIN_USER } from '../../utils/globalConfig';
+import { PATH_DASHBOARD_ADMIN, PATH_DASHBOARD_USER, PATH_PUBLIC } from '../../routes/paths';
+import { RiAdminFill } from "react-icons/ri";
+import { FaUser } from "react-icons/fa6";
+import { useState } from 'react';
 
 
 const Header = () => {
     const { isAuthenticated, isAuthLoading, user, logout } = useAuth();
     const navigate = useNavigate();
+    const [userMode,setUserMode] = useState(true);
+
+    const toggleUserMode = () => {
+        const switchToggle = document.querySelector('#switch-toggle')
+
+        if(userMode){
+            switchToggle.classList.remove('-translate-x-2')
+            switchToggle.classList.add('translate-x-full')
+            setTimeout(() => {
+                switchToggle.innerHTML = 'A'
+            }, 250);
+            setUserMode(false);
+        } else {
+            switchToggle.classList.add('-translate-x-2')
+            switchToggle.classList.remove('translate-x-full')
+            setTimeout(() => {
+                switchToggle.innerHTML = 'U'
+            }, 250);
+            setUserMode(true);
+        }
+    }
 
     const userRolesLabelCreator = () => {
         if (user && user.roles) {
@@ -41,13 +64,13 @@ const Header = () => {
                     </h1>
                 </div>
             </div>
-            <div>
+            <div className='flex items-center'>
                 {
                     isAuthenticated ? (
                         <div className='flex items-center gap-2'>
-                            <Button 
+                            <Button
                                 label='Dashboard'
-                                onClick={() => user.roles == "Admin" ? navigate(PATH_DASHBOARD_ADMIN.dashboard) : navigate(PATH_AFTER_LOGIN_USER.dashboard)}
+                                onClick={() => user.roles == "Admin" ? navigate(PATH_DASHBOARD_ADMIN.dashboard) : navigate(PATH_DASHBOARD_USER.dashboard)}
                                 type='button'
                                 variant='light'
                             />
@@ -59,20 +82,34 @@ const Header = () => {
                             />
                         </div>
                     ) : (
-                        <div className='flex items-center gap-2'>
-                            <Button 
+                        <div className='flex items-center gap-2 px-5'>
+                            <Button
                                 label='Register'
                                 onClick={() => navigate(PATH_PUBLIC.register)}
                                 type='button'
                                 variant='light'
                             />
-                            <Button 
+                            <Button
                                 label='Login'
                                 onClick={() => navigate(PATH_PUBLIC.login)}
                                 type='button'
                                 variant='light'
                             />
                         </div>
+                    )
+                }
+                {
+                    isAuthenticated ? (
+                        <div></div>
+                    ) : (
+                        <button className='mx-2 cursor-default h-9 w-14 rounded-2xl bg-white flex items-center transition duration-300 focus:outline-none shadow'
+                        onClick={toggleUserMode}>
+                            <div
+                                id='switch-toggle'
+                                className='cursor-pointer m-0 h-9 w-9 flex items-center justify-center relative rounded-full transition duration-500 transform bg-violet-500 -translate-x-2 p-1 text-white'>
+                                U
+                            </div>
+                        </button>
                     )
                 }
             </div>
