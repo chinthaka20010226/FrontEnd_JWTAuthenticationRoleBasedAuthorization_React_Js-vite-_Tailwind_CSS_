@@ -24,7 +24,7 @@ const Header = () => {
                     className='w-8 h-8 text-purple-500 hover:text-purple-700 cursor-pointer'
                     onClick={() => navigate('/')}
                 />
-                <div className='flex gap-1'>
+                <div className='flex gap-1 justify-between item'>
                     <h1 className='px-1 border border-dashed border-purple-300 rounded-lg'>
                         AuthLoading: {isAuthLoading ? 'True' : '--'}
                     </h1>
