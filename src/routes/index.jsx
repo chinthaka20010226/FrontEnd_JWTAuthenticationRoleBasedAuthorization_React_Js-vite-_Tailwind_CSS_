@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { PATH_DASHBOARD, PATH_PUBLIC } from './paths';
-import AuthGuard from '../auth/AuthGuard';
-import { allAccessRoles, adminAccessRoles } from '../auth/auth.utils';
+import AuthGuardForAdminUser from '../auth/AuthGuardForAdminUser';
+import AuthGuardForAdmin from '../auth/AuthGuardForAdmin';
 import Layout from '../components/layout';
 
 import AdminPage from '../pages/dashboard/AdminPage';
@@ -33,7 +33,7 @@ const GlobalRouter = () => {
                 <Route path={PATH_PUBLIC.unauthorized} element={<UnauthorizedPage />} />
 
                 {/* Protected routes */}
-                <Route element={<AuthGuard />}>
+                <Route element={<AuthGuardForAdminUser />}>
                     <Route path={PATH_DASHBOARD.dashboard} element={<DashboardPage />} />
                     <Route path={PATH_DASHBOARD.sendMessage} element={<SendMessagePage />} />
                     <Route path={PATH_DASHBOARD.inbox} element={<InboxPage />} />
@@ -41,7 +41,7 @@ const GlobalRouter = () => {
                     <Route path={PATH_DASHBOARD.user} element={<UserPage />} />
                 </Route>
 
-                <Route element={<AuthGuard />}>
+                <Route element={<AuthGuardForAdmin />}>
                     <Route path={PATH_DASHBOARD.admin} element={<AdminPage />} />
                     <Route path={PATH_DASHBOARD.usersManagement} element={<UsersManagementPage />} />
                     <Route path={PATH_DASHBOARD.allMessages} element={<AllMessagesPage />} />

@@ -24,57 +24,71 @@ const Sidebar = () => {
                 </h4>
             </div>
 
-            <Button 
-                label='Users Management'
-                onClick={() => handelClick(PATH_DASHBOARD.usersManagement)}
-                type='button'
-                variant='secondary'
-            />
-            <Button 
-                label='Send Message'
-                onClick={() => handelClick(PATH_DASHBOARD.sendMessage)}
-                type='button'
-                variant='secondary'
-            />
-            <Button 
-                label='Inbox'
-                onClick={() => handelClick(PATH_DASHBOARD.inbox)}
-                type='button'
-                variant='secondary'
-            />
-            <Button 
-                label='All Messages'
-                onClick={() => handelClick(PATH_DASHBOARD.allMessages)}
-                type='button'
-                variant='secondary'
-            />
-            <Button 
-                label='All Logs'
-                onClick={() => handelClick(PATH_DASHBOARD.systemLogs)}
-                type='button'
-                variant='secondary'
-            />
-            <Button 
-                label='My Logs'
-                onClick={() => handelClick(PATH_DASHBOARD.myLogs)}
-                type='button'
-                variant='secondary'
-            />
+            {
+                user.roles == "Admin" ? (
+                    <div className='flex flex-col items-stretch gap-8'>
+                        <Button
+                            label='Users Management'
+                            onClick={() => handelClick(PATH_DASHBOARD.usersManagement)}
+                            type='button'
+                            variant='secondary'
+                        />
+                        <Button
+                            label='Send Message'
+                            onClick={() => handelClick(PATH_DASHBOARD.sendMessage)}
+                            type='button'
+                            variant='secondary'
+                        />
+                        <Button
+                            label='Inbox'
+                            onClick={() => handelClick(PATH_DASHBOARD.inbox)}
+                            type='button'
+                            variant='secondary'
+                        />
+                        <Button
+                            label='All Messages'
+                            onClick={() => handelClick(PATH_DASHBOARD.allMessages)}
+                            type='button'
+                            variant='secondary'
+                        />
+                        <Button
+                            label='All Logs'
+                            onClick={() => handelClick(PATH_DASHBOARD.systemLogs)}
+                            type='button'
+                            variant='secondary'
+                        />
+                        <Button
+                            label='My Logs'
+                            onClick={() => handelClick(PATH_DASHBOARD.myLogs)}
+                            type='button'
+                            variant='secondary'
+                        />
+                    </div>
+                ) : (
+                    <div className='flex flex-col items-stretch gap-8'>
+                        <Button
+                            label='Send Message'
+                            onClick={() => handelClick(PATH_DASHBOARD.sendMessage)}
+                            type='button'
+                            variant='secondary'
+                        />
+                        <Button
+                            label='Inbox'
+                            onClick={() => handelClick(PATH_DASHBOARD.inbox)}
+                            type='button'
+                            variant='secondary'
+                        />
+                        <Button
+                            label='My Logs'
+                            onClick={() => handelClick(PATH_DASHBOARD.myLogs)}
+                            type='button'
+                            variant='secondary'
+                        />
+                    </div>
+                )
+            }
 
-            <hr/>
-            
-            <Button 
-                label='Admin Page'
-                onClick={() => handelClick(PATH_DASHBOARD.admin)}
-                type='button'
-                variant='secondary'
-            />
-            <Button 
-                label='User Page'
-                onClick={() => handelClick(PATH_DASHBOARD.user)}
-                type='button'
-                variant='secondary'
-            />
+
 
         </div>
     )
