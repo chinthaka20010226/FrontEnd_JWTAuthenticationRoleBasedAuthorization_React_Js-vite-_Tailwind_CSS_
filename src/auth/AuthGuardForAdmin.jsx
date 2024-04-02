@@ -8,7 +8,7 @@ const AuthGuardForAdmin = () => {
     const { isAuthenticated, user, isAuthLoading } = useAuth();
 
     // Do we have access to the requeted page(the page will be rendered in <Outlet />)
-    const hasAccess = isAuthenticated && user.roles == "Admin";
+    const hasAccess = isAuthenticated && user.roles == "Admin" && localStorage.getItem('mode') == 'admin';
     // console.log(user.roles);
 
     if(isAuthLoading){

@@ -115,10 +115,11 @@ const AuthContextProvider = ({ children }) => {
     },[]);
 
     //Login Method
-    const login = useCallback(async (userName,password) => {
+    const login = useCallback(async (userName,password,mode) => {
         const response = await axiosInstance.post(LOGIN_URL, {
             userName,
             password,
+            mode,
         });
         toast.success('Login Was Successful');
 

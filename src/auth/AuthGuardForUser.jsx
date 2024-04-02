@@ -4,11 +4,11 @@ import AuthSpinner from '../components/general/AuthSpinner';
 import { PATH_PUBLIC } from '../routes/paths';
 
 
-const AuthGuardForAdminUser = () => {
+const AuthGuardForUser = () => {
     const { isAuthenticated, user, isAuthLoading } = useAuth();
 
     // Do we have access to the requeted page(the page will be rendered in <Outlet />)
-    const hasAccess = isAuthenticated && (user.roles == "User" || user.roles == "Admin"); 
+    const hasAccess = isAuthenticated && user.roles == "User" && localStorage.getItem('mode') == 'user'; 
     // console.log(user.roles);
 
     if(isAuthLoading){
@@ -18,4 +18,4 @@ const AuthGuardForAdminUser = () => {
     return hasAccess ? <Outlet /> : <Navigate to={PATH_PUBLIC.unauthorized} />;
 };
 
-export default AuthGuardForAdminUser;
+export default AuthGuardForUser;

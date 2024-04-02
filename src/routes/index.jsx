@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { PATH_DASHBOARD_ADMIN, PATH_DASHBOARD_USER, PATH_DASHBOARD, PATH_PUBLIC } from './paths';
-import AuthGuardForAdminUser from '../auth/AuthGuardForAdminUser';
+import { PATH_DASHBOARD_ADMIN, PATH_DASHBOARD_USER, PATH_PUBLIC } from './paths';
+import AuthGuardForUser from '../auth/AuthGuardForUser';
 import AuthGuardForAdmin from '../auth/AuthGuardForAdmin';
 import Layout from '../components/layout';
 
@@ -33,7 +33,7 @@ const GlobalRouter = () => {
                 <Route index element={<HomePage />} />
 
                 {/* Protected routes */}
-                <Route element={<AuthGuardForAdminUser />}>
+                <Route element={<AuthGuardForUser />}>
                     <Route path={PATH_DASHBOARD_USER.dashboard} element={<UserDashboard />} />
                     <Route path={PATH_DASHBOARD_USER.sendMessage} element={<SendMessagePage />} />
                     <Route path={PATH_DASHBOARD_USER.inbox} element={<InboxPage />} />

@@ -43,9 +43,16 @@ const Header = () => {
                 />
                 {
                     mode == 'user' ? (
-                        <div></div>
+                        <div className='flex justify-center items-center'>
+                            <ul className='flex gap-4 items-center justify-center'>
+                                <li className='cursor-pointer'>Home</li>
+                                <li className='cursor-pointer'>Services</li>
+                                <li className='cursor-pointer'>About</li>
+                                <li className='cursor-pointer'>Contact</li>
+                            </ul>
+                        </div>
                     ) : (
-                        <div className='flex gap-1 justify-between item'>
+                        <div className='flex gap-1 justify-between items-center'>
                             <h1 className='px-1 border border-dashed border-purple-300 rounded-lg'>
                                 AuthLoading: {isAuthLoading ? 'True' : '--'}
                             </h1>
