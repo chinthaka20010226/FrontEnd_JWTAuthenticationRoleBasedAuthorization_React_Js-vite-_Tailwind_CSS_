@@ -4,35 +4,28 @@ import { AiOutlineHome } from 'react-icons/ai';
 import { FiLock, FiUnlock } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import { PATH_DASHBOARD_ADMIN, PATH_DASHBOARD_USER, PATH_PUBLIC } from '../../routes/paths';
-import { RiAdminFill } from "react-icons/ri";
-import { FaUser } from "react-icons/fa6";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 const Header = () => {
     const { isAuthenticated, isAuthLoading, user, logout } = useAuth();
     const navigate = useNavigate();
-    const [userMode,setUserMode] = useState(true);
+    const [mode, setMode] = useState(() => {
+        // Check if mode is stored in local storage
+        const storedMode = localStorage.getItem('mode');
+        // Return stored mode if exists, otherwise default to 'user'
+        return storedMode ? storedMode : 'user';
+    });
 
-    const toggleUserMode = () => {
-        const switchToggle = document.querySelector('#switch-toggle')
+    // Update local storage when mode changes
+    useEffect(() => {
+        localStorage.setItem('mode', mode);
+    }, [mode]);
 
-        if(userMode){
-            switchToggle.classList.remove('-translate-x-2')
-            switchToggle.classList.add('translate-x-full')
-            setTimeout(() => {
-                switchToggle.innerHTML = 'A'
-            }, 250);
-            setUserMode(false);
-        } else {
-            switchToggle.classList.add('-translate-x-2')
-            switchToggle.classList.remove('translate-x-full')
-            setTimeout(() => {
-                switchToggle.innerHTML = 'U'
-            }, 250);
-            setUserMode(true);
-        }
-    }
+    const toggleMode = () => {
+        // Toggle mode between 'user' and 'admin'
+        setMode(preMode => (preMode == 'user' ? 'admin' : 'user'));
+    };
 
     const userRolesLabelCreator = () => {
         if (user && user.roles) {
@@ -48,21 +41,27 @@ const Header = () => {
                     className='w-8 h-8 text-purple-500 hover:text-purple-700 cursor-pointer'
                     onClick={() => navigate('/')}
                 />
-                <div className='flex gap-1 justify-between item'>
-                    <h1 className='px-1 border border-dashed border-purple-300 rounded-lg'>
-                        AuthLoading: {isAuthLoading ? 'True' : '--'}
-                    </h1>
-                    <h1 className='px-1 border border-dashed border-purple-300 rounded-lg flex items-center gap-1'>
-                        Auth:
-                        {isAuthenticated ? <FiUnlock className='text-green-600' /> : <FiLock className='text-red-600' />}
-                    </h1>
-                    <h1 className='px-1 border border-dashed border-purple-300 rounded-lg'>
-                        UserName: {user ? user.userName : '--'}
-                    </h1>
-                    <h1 className='px-1 border border-dashed border-purple-300 rounded-lg'>
-                        UserRoles: {userRolesLabelCreator()}
-                    </h1>
-                </div>
+                {
+                    mode == 'user' ? (
+                        <div></div>
+                    ) : (
+                        <div className='flex gap-1 justify-between item'>
+                            <h1 className='px-1 border border-dashed border-purple-300 rounded-lg'>
+                                AuthLoading: {isAuthLoading ? 'True' : '--'}
+                            </h1>
+                            <h1 className='px-1 border border-dashed border-purple-300 rounded-lg flex items-center gap-1'>
+                                Auth:
+                                {isAuthenticated ? <FiUnlock className='text-green-600' /> : <FiLock className='text-red-600' />}
+                            </h1>
+                            <h1 className='px-1 border border-dashed border-purple-300 rounded-lg'>
+                                UserName: {user ? user.userName : '--'}
+                            </h1>
+                            <h1 className='px-1 border border-dashed border-purple-300 rounded-lg'>
+                                UserRoles: {userRolesLabelCreator()}
+                            </h1>
+                        </div>
+                    )
+                }
             </div>
             <div className='flex items-center'>
                 {
@@ -102,13 +101,14 @@ const Header = () => {
                     isAuthenticated ? (
                         <div></div>
                     ) : (
-                        <button className='mx-2 cursor-default h-9 w-14 rounded-2xl bg-white flex items-center transition duration-300 focus:outline-none shadow'
-                        onClick={toggleUserMode}>
+                        <button
+                            className='mx-2 cursor-default h-9 w-14 rounded-2xl bg-white flex items-center transition duration-300 focus:outline-none shadow'
+                            onClick={toggleMode}>
                             <div
-                                id='switch-toggle'
-                                className='cursor-pointer m-0 h-9 w-9 flex items-center justify-center relative rounded-full transition duration-500 transform bg-violet-500 -translate-x-2 p-1 text-white'>
-                                U
-                            </div>
+                                id='switch-mode'
+                                className={`cursor-pointer m-0 h-9 w-9 flex items-center justify-center relative rounded-full transition duration-500 transform bg-violet-500 
+                                ${mode == 'user' ? '-translate-x-2' : 'translate-x-full'} p-1 text-white`}>
+                                {mode == 'user' ? 'U' : 'A'}</div>
                         </button>
                     )
                 }
