@@ -5,7 +5,8 @@ import { FiLock, FiUnlock } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import { PATH_DASHBOARD_ADMIN, PATH_DASHBOARD_USER, PATH_PUBLIC } from '../../routes/paths';
 import { useEffect, useState } from 'react';
-
+import { RiAdminFill } from "react-icons/ri";
+import { FaUser } from "react-icons/fa6";
 
 const Header = () => {
     const { isAuthenticated, isAuthLoading, user, logout } = useAuth();
@@ -115,7 +116,7 @@ const Header = () => {
                                 id='switch-mode'
                                 className={`cursor-pointer m-0 h-9 w-9 flex items-center justify-center relative rounded-full transition duration-500 transform bg-violet-500 
                                 ${mode == 'user' ? '-translate-x-2' : 'translate-x-full'} p-1 text-white`}>
-                                {mode == 'user' ? 'U' : 'A'}</div>
+                                {mode == 'user' ? <FaUser /> : <RiAdminFill />}</div>
                         </button>
                     )
                 }
